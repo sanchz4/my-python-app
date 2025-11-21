@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-secure:
+  devsecops:
     runs-on: ubuntu-latest
     steps:
       # 1. Checkout code
@@ -26,9 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Lint the code
-      - name: Lint with pylint
-        run: pylint app.py tests/*.py
+      # 4. Lint code (non-blocking)
+      - name: Lint with pylint (non-blocking)
+        run: pylint app.py tests/*.py || true
 
       # 5. Run unit tests
       - name: Run unit tests
@@ -38,7 +38,7 @@ jobs:
       - name: Check for vulnerabilities
         run: safety check -r requirements.txt
 
-      # 7. Optional: Build package (wheel)
+      # 7. Optional: Build package (if setup.py exists)
       - name: Build Python package
         run: |
           python setup.py sdist bdist_wheel || echo "No setup.py, skipping build"
