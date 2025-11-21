@@ -30,9 +30,10 @@ jobs:
       - name: Lint with pylint (non-blocking)
         run: pylint app.py tests/*.py || true
 
-      # 5. Run unit tests
+      # 5. Run unit tests with correct PYTHONPATH
       - name: Run unit tests
-        run: pytest tests --maxfail=1 --disable-warnings -q
+        run: |
+          PYTHONPATH=$(pwd) pytest tests --maxfail=1 --disable-warnings -q
 
       # 6. Dependency vulnerability scan
       - name: Check for vulnerabilities
