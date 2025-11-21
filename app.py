@@ -1,4 +1,11 @@
-# app.py
+"""
+app.py
+
+A simple Python module that provides basic arithmetic functions:
+- add(a, b)
+- subtract(a, b)
+"""
+
 def add(a, b):
     """Return the sum of two numbers."""
     return a + b
